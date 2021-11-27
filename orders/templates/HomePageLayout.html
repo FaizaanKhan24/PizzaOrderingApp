@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if request.user.is_superuser %}
+            <nav class="navbar navbar-light bg-dark">
+                <div class="col-7"></div>
+                <div class="col-1"><a href="admin"><button class="btn btn-sm btn-outline-success">Admin</button></a></div>
+                <div class="col-1"><a href="{% url 'orders'%}"><button class="btn btn-sm btn-outline-primary">Orders</button></a></div>
+                <div class="col-1"><a href="{% url 'cart' %}"><button class="btn btn-sm btn-outline-warning">Cart</button></a></div>
+                <div class="col-1"><a href="{% url 'home' %}"><button class="btn btn-sm btn-outline-info">Menu</button></a></div>
+                <div class="col-1"><a href="{% url 'logout' %}"><button class="btn btn-sm btn-outline-danger">Logout</button></a></div>
+            </nav>
+        {% else %}
+            <nav class="navbar navbar-light bg-dark">
+                <div class="col-8"></div>
+                <div class="col-1"><a href="{% url 'cart' %}"><button class="btn btn-sm btn-outline-warning">Cart</button></a></div>
+                <div class="col-1"><a href="{% url 'home' %}"><button class="btn btn-sm btn-outline-info">Menu</button></a></div>
+                <div class="col-1"><a href="{% url 'logout' %}"><button class="btn btn-sm btn-outline-danger">Logout</button></a></div>
+            </nav>
+        {% endif %}
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

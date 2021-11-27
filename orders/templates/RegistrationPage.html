@@ -1,0 +1,51 @@
+{% extends 'layout.html'%}
+
+{% block title %}
+    Registration Page
+{% endblock%}
+
+{% block body %}
+{% if messages %}
+    {% for message in messages %}
+        <div role="alert" class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="container">
+    <div class="col-12">
+        <h1 >Register to Pinocchio's Pizza & Subs</h1>
+    </div>
+    <form class="col-6" style="margin: auto;" method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <label>Username</label>
+        </div>
+        {{form.username}}
+        <div>
+            <label>Password</label>
+        </div>
+        {{form.password1}}
+        <div>
+            <label>Re-type Password</label>
+        </div>
+        {{form.password2}}
+        <div>
+            <label>First Name</label>
+        </div>
+        {{form.first_name}}
+        <div>
+            <label>Last Name</label>
+        </div>
+        {{form.last_name}}
+        <div>
+            <label>E-mail</label>
+        </div>
+        {{form.email}}
+        <div style="margin-top: 10px;">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    {{form.error}}
+</div>
+{% endblock %}

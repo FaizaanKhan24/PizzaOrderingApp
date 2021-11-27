@@ -1,0 +1,200 @@
+{% extends 'HomePageLayout.html' %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert" style="text-align: center;"> 
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container-fluid">
+        <h4 style="text-align: center;">Regular Pizza</h4>
+        <div class="row">
+            <table class="table col-10" id="regular">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Small</th>
+                        <th scope="col">Large</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in RegularPizza %}
+                    <tr>
+                        <th>{{ item.pizza_name }}</th>
+                        <td>$ {{ item.small_pizza_price }}</td>
+                        <td>$ {{ item.large_pizza_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-2">
+                Choose Toppings
+                <div>
+                    <form id="regularsubmit"> 
+                        <select class="custom-select" multiple size="10" id="toppings">
+                            {% for item in Toppings %}
+                                <option>{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select class="custom-select" id="sizeValue">
+                            <option>Small</option>
+                            <option>Large</option>
+                        </select>
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <h4 style="text-align: center;">Sicilian Pizza</h4>
+        <div class="row">
+            <table class="table col-10">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Small</th>
+                        <th scope="col">Large</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in SicilianPizza%}
+                    <tr>
+                        <th>{{item.pizza_name}}</th>
+                        <td>$ {{item.small_pizza_price}}</td>
+                        <td>$ {{item.large_pizza_price}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-2">
+                Choose Toppings
+                <div>
+                    <form id="siciliansubmit"> 
+                        <select class="custom-select" multiple size="10" id="SicilainToppings">
+                            {% for item in Toppings %}
+                                <option>{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select class="custom-select" id="SicilainSizeValue">
+                            <option>Small</option>
+                            <option>Large</option>
+                        </select>
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <h4 style="text-align: center;">Subs</h4>
+        <div class="row">
+            <table class="table col-12">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Small</th>
+                        <th scope="col">Large</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in Subs %}
+                    <tr>
+                        <th>{{item.sub_name}}</th>
+                        <td>
+                            {% if item.small_sub_price %}
+                                $ {{item.small_sub_price}}
+                                <a href="{% url 'addToCart' item_type='sub' item_size='Small' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            $ {{item.large_sub_price}}
+                            <a href="{% url 'addToCart' item_type='sub' item_size='Large' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Extra Cheese on any sub</th>
+                        <td>+0.50<button class="btn btn-sm btn-outline-primary">Add</button></td>
+                        <td>+0.50<button class="btn btn-sm btn-outline-primary">Add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h4 style="text-align: center;">Pasta</h4>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in Pasta %}
+                    <tr>
+                        <th>{{item.pasta_name}}</th>
+                        <td>
+                            $ {{item.pasta_price}}
+                            <a href="{% url 'addToCart' item_type='pasta' item_size='Regular' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h4 style="text-align: center;">Salads</h4>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in Salads %}
+                    <tr>
+                        <th>{{item.salad_name}}</th>
+                        <td>
+                            $ {{item.salad_price}}
+                            <a href="{% url 'addToCart' item_type='salad' item_size='Regular' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h4 style="text-align: center;">Dinner Platters</h4>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Small</th>
+                        <th scope="col">Large</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in DinnerPlatter %}
+                    <form id="Platter">
+                        <tr>
+                            <th>{{item.platter_name}}</th>
+                            <td>
+                                <div>
+                                    $ {{item.small_platter_price}}
+                                    <a href="{% url 'addToCart' item_type='platter' item_size='Small' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                                </div>
+                            </td>
+                            <td>
+                                $ {{item.large_platter_price}}
+                                <a href="{% url 'addToCart' item_type='platter' item_size='Large' item_id=item.id %}"><button class="btn btn-sm btn-outline-primary" type="button">Add</button></a>
+                            </td>
+                        </tr>
+                    </form>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% load staticfiles %}
+    <script src="{% static 'menu.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+{% block body%}
+<div class="container-fluid">
+    <nav class="navbar navbar-light bg-light">
+        <a href="{% url 'register' %}"><button class="btn btn-sm btn-outline-secondary" type="button">Register</button></a>
+        <form class="form-inline" method="POST" >
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+        </form>
+    </nav>
+</div>
+<div class="container">
+    <h1 class="text-center" ><span class="align-middle">Welcome to Pinocchio's Pizza & Subs</span></h1>
+</div>
+<div class="container" style="background-color: blue; height: 3px;">
+   <div class="row">
+    <div class="col-4" style="background-color: red; height: 3px;"></div>
+    <div class="col-4" style="background-color: white; height: 3px;"></div>
+    <div class="col-4" style="background-color: green; height: 3px;"></div>
+   </div>
+</div>
+<div>
+    <h1>
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+    </h1>
+</div>
+{% endblock %}

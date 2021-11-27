@@ -1,0 +1,30 @@
+{% extends "HomePageLayout.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h2 style="text-align: center;">Orders</h2>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <th scope="col">Username</th>
+                    <th scope="col">Order</th>
+                    <th scope="col">Size</th>
+                </thead>
+                <tbody>
+                    {% for item in orders %}
+                        <tr>
+                            <th>{{ item.username }}</th>
+                            <td>
+                                {{ item.item_name }}
+                                <div>
+                                    Toppings : {{ item.extras }}
+                                </div>
+                            </td>
+                            <td>{{ item.size }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

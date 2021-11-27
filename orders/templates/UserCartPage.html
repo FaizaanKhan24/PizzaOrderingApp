@@ -1,0 +1,59 @@
+{% extends 'HomePageLayout.html' %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" role="alert" style="text-align: center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if cart_items %}
+    <div class="container-fluid" style="margin-bottom: 15px;">
+        <h3 style="text-align: center;">Cart</h3>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" style="text-align: center;">Orders</th>
+                        <th scope="col" style="text-align: center;">Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>
+                                <div>
+                                    {{ item.item_name }} - {{ item.size }}
+                                </div>
+                                {% if item.extras %}
+                                    <div>
+                                        Extras : {{ item.extras }}
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td style="text-align: center;">
+                                $ {{ item.price }}
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger remove" data-id={{item.id}}>Remove</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h3 style="text-align: center; background-color: greenyellow;">Total : {{ cart_total }}</h3>
+        <form class="form" id="placeOrder">
+            <button type="submit" class="btn btn-outline-primary col-12">Place Order</button>
+        </form>
+        {% load staticfiles %}
+        <script src="{% static 'cart.js' %}"></script>
+    </div>
+    {% else %}
+        <div>
+            No items available
+        </div>
+    {% endif %}
+{% endblock %}
